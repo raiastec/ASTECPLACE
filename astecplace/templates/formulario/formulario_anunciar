@@ -1,0 +1,41 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Anuncie Conosco - Astecplace{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-6 rounded shadow mt-10">
+  <h2 class="text-2xl font-bold mb-4">Anuncie Conosco</h2>
+  
+  {% if messages %}
+    <ul>
+      {% for message in messages %}
+        <li class="text-green-600 mb-4">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <form method="POST" class="space-y-4">
+    {% csrf_token %}
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Nome</label>
+      <input type="text" name="nome" required class="w-full border border-gray-300 rounded px-3 py-2">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">E-mail</label>
+      <input type="email" name="email" required class="w-full border border-gray-300 rounded px-3 py-2">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Telefone</label>
+      <input type="text" name="telefone" required class="w-full border border-gray-300 rounded px-3 py-2">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Mensagem</label>
+      <textarea name="mensagem" rows="4" required class="w-full border border-gray-300 rounded px-3 py-2"></textarea>
+    </div>
+    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+      Enviar
+    </button>
+  </form>
+</div>
+{% endblock %}

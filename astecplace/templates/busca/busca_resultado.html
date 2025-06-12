@@ -1,0 +1,76 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Resultados da busca - Astecplace{% endblock %}
+
+{% block content %}
+  <div class="max-w-7xl mx-auto p-4">
+    <h2 class="text-2xl font-bold text-center mb-6">Resultados para: "{{ query }}"</h2>
+
+    {% if resultados %}
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {% for anuncio in resultados %}
+          <div class="bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col">
+
+            {% if anuncio.imagens.all|length %}
+              <div class="swiper mySwiper-{{ forloop.counter }} w-full h-64 mb-4 rounded-lg overflow-hidden">
+                <div class="swiper-wrapper">
+                  {% for imagem in anuncio.imagens.all %}
+                    <div class="swiper-slide">
+                      <img src="{{ imagem.imagem.url }}" class="w-full h-64 object-cover" alt="Imagem">
+                    </div>
+                  {% endfor %}
+                </div>
+                <div class="swiper-button-next text-white"></div>
+                <div class="swiper-button-prev text-white"></div>
+                <div class="swiper-pagination"></div>
+              </div>
+            {% endif %}
+
+            <div class="flex-1 flex flex-col justify-between">
+              <div>
+                <h2 class="text-xl font-semibold text-gray-800 mb-1">{{ anuncio.titulo }}</h2>
+                <p class="text-gray-600 text-sm mb-2">{{ anuncio.descricao|truncatechars:200 }}</p>
+                <ul class="text-xs text-gray-500 mb-3">
+                  <li><strong>Localização:</strong> {{ anuncio.localizacao }}</li>
+                  <li><strong>Categoria:</strong> {{ anuncio.categoria.nome }}</li>
+                </ul>
+              </div>
+              <div class="flex items-center justify-between mt-4">
+                <p class="text-green-700 font-bold text-lg">R$ {{ anuncio.preco|floatformat:2 }}</p>
+                <a href="https://wa.me/SEUNUMERO?text=Tenho%20interesse%20no%20anúncio%20{{ anuncio.titulo }}" 
+                   class="bg-green-600 text-white text-sm px-3 py-1 rounded hover:bg-green-700">Saiba mais</a>
+              </div>
+            </div>
+
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-center text-gray-600">Nenhum anúncio encontrado.</p>
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block extra_scripts %}
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    document.querySelectorAll('.swiper').forEach((el, index) => {
+      const nextBtn = el.querySelector('.swiper-button-next');
+      const prevBtn = el.querySelector('.swiper-button-prev');
+      const pagination = el.querySelector('.swiper-pagination');
+
+      new Swiper(el, {
+        loop: true,
+        navigation: {
+          nextEl: nextBtn,
+          prevEl: prevBtn,
+        },
+        pagination: {
+          el: pagination,
+          clickable: true,
+        }
+      });
+    });
+  </script>
+{% endblock %}

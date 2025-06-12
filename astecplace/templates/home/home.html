@@ -122,17 +122,18 @@
             </div>
             <div class="flex gap-2">
               <a href="#" class="text-green-600 text-sm px-3 py-1 border border-green-600 rounded hover:bg-green-50">+ Detalhes</a>
-              <a href="https://astecassessoriaagropecuaria.bitrix24.com.br/rest/31/gkbg8p3jt4t01zgk/crm.product.list.json{{ anuncio.titulo }}" target="_blank" class="bg-green-600 text-white text-sm px-3 py-1 rounded hover:bg-green-700">Saiba mais</a>
+              <a href="https://astecassessoriaagropecuaria.bitrix24.com.br/rest/31/xxnbvv4is9jfat4j/crm.lead.add.json?FIELDS[TITLE]=Novo lead&FIELDS[NAME]=João&FIELDS[LAST_NAME]=Silva&FIELDS[EMAIL][0][VALUE]=mail@example.com&FIELDS[EMAIL][0][VALUE_TYPE]=WORK&FIELDS[PHONE][0][VALUE]=555888&FIELDS[PHONE][0][VALUE_TYPE]=WORK{{ anuncio.titulo }}" target="_blank" class="bg-green-600 text-white text-sm px-3 py-1 rounded hover:bg-green-700">Saiba mais</a>
             </div>
           </div>
         </div>
-
+        
       </div>
     {% endfor %}
   </div>
 {% else %}
   <p class="text-center text-gray-600">Nenhum anúncio encontrado.</p>
 {% endif %}
+
 
 {% endblock %}
 
@@ -158,6 +159,7 @@
       });
     });
   </script>
+
 {% endblock %}
 
 

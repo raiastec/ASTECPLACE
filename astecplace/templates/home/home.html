@@ -119,15 +119,47 @@
             <div>
               <p class="text-green-700 font-bold text-lg">R$ {{ anuncio.preco|floatformat:2 }}</p>
               
-            </div>
-            <div class="flex gap-2">
-              <a href="#" class="text-green-600 text-sm px-3 py-1 border border-green-600 rounded hover:bg-green-50">+ Detalhes</a>
-              <a href="https://astecassessoriaagropecuaria.bitrix24.com.br/rest/31/xxnbvv4is9jfat4j/crm.lead.add.json?FIELDS[TITLE]=Novo lead&FIELDS[NAME]=João&FIELDS[LAST_NAME]=Silva&FIELDS[EMAIL][0][VALUE]=mail@example.com&FIELDS[EMAIL][0][VALUE_TYPE]=WORK&FIELDS[PHONE][0][VALUE]=555888&FIELDS[PHONE][0][VALUE_TYPE]=WORK{{ anuncio.titulo }}" target="_blank" class="bg-green-600 text-white text-sm px-3 py-1 rounded hover:bg-green-700">Saiba mais</a>
-            </div>
-          </div>
-        </div>
-        
+             <div class="flex gap-2">
+        <a href="#" class="text-green-600 text-sm px-3 py-1 border border-green-600 rounded hover:bg-green-50">+ Detalhes</a>
+        <button onclick="abrirFormulario('{{ anuncio.titulo }}')" class="bg-green-600 text-white text-sm px-3 py-1 rounded hover:bg-green-700">Saiba mais</button>
       </div>
+    </div>
+  {% endfor %}
+</div>
+
+<!-- MODAL DO FORMULÁRIO -->
+<div id="formModal" class="fixed inset-0 z-50 bg-black bg-opacity-50 hidden flex items-center justify-center">
+  <div class="bg-white w-full max-w-md rounded shadow p-6 relative">
+    <button onclick="fecharFormulario()" class="absolute top-2 right-3 text-gray-600 text-xl">&times;</button>
+    <h3 class="text-xl font-bold mb-4">Fale com a Astecplace</h3>
+
+    <form method="POST" action="{% url 'enviar_lead_bitrix' %}" class="space-y-4">
+      {% csrf_token %}
+      <input type="hidden" id="tituloInput" name="titulo">
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Nome</label>
+        <input type="text" name="nome" required class="w-full border border-gray-300 rounded px-3 py-2">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700">E-mail</label>
+        <input type="email" name="email" required class="w-full border border-gray-300 rounded px-3 py-2">
+      </div>
+      <div>
+        <div>
+       <label class="block text-sm font-medium text-gray-700">Telefone</label>
+       <input type="text" name="telefone" required class="w-full border border-gray-300 rounded px-3 py-2">
+</div>
+
+<button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-full">
+  Enviar para Astecplace
+</button>
+
+</form>
+</div>
+</div>
+
+{% endfor %}
+
     {% endfor %}
   </div>
 {% else %}
@@ -139,6 +171,19 @@
 
 
 {% block extra_scripts %}
+
+  <script>
+  function abrirFormulario(titulo) {
+    document.getElementById('tituloInput').value = titulo;
+    document.getElementById('formModal').classList.remove('hidden');
+  }
+
+  function fecharFormulario() {
+    document.getElementById('formModal').classList.add('hidden');
+  }
+  </script>
+
+
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
     document.querySelectorAll('.swiper').forEach((el, index) => {

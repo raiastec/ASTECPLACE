@@ -4,47 +4,47 @@
 {% block title %}Anuncie Conosco - Astecplace{% endblock %}
 
 {% block content %}
-<section class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg mt-10">
+<section class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-md mt-10">
   <h2 class="text-3xl font-extrabold text-green-700 mb-6 text-center">Anuncie no Astecplace</h2>
   <p class="text-center text-gray-600 mb-8">
     Preencha o formulário abaixo para anunciar seus produtos ou imóveis no nosso portal. Entraremos em contato em breve!
   </p>
 
   {% if messages %}
-    <div class="mb-6">
+    <div class="mb-6 space-y-2">
       {% for message in messages %}
-        <div class="text-green-700 bg-green-100 border border-green-300 px-4 py-2 rounded">
+        <div class="text-green-800 bg-green-100 border border-green-300 px-4 py-2 rounded-md shadow-sm">
           {{ message }}
         </div>
       {% endfor %}
     </div>
   {% endif %}
 
-  <form method="POST" class="space-y-5">
+  <form method="POST" class="space-y-6">
     {% csrf_token %}
 
     <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">Nome</label>
-      <input type="text" name="nome" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none">
+      <label class="block text-sm font-medium text-gray-700 mb-2">Nome</label>
+      <input type="text" name="nome" required class="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none transition">
     </div>
 
     <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
-      <input type="email" name="email" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none">
+      <label class="block text-sm font-medium text-gray-700 mb-2">E-mail</label>
+      <input type="email" name="email" required class="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none transition">
     </div>
 
     <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">Telefone</label>
-      <input type="text" name="telefone" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none">
+      <label class="block text-sm font-medium text-gray-700 mb-2">Telefone</label>
+      <input type="text" name="telefone" required class="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none transition">
     </div>
 
     <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">Mensagem</label>
-      <textarea name="mensagem" rows="4" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none resize-none"></textarea>
+      <label class="block text-sm font-medium text-gray-700 mb-2">Mensagem</label>
+      <textarea name="mensagem" rows="4" required class="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none resize-none transition"></textarea>
     </div>
 
     <div class="flex justify-center">
-      <button type="submit" class="bg-green-600 text-white font-semibold px-6 py-2 rounded-lg shadow hover:bg-green-700 transition">
+      <button type="submit" class="bg-green-600 text-white font-semibold px-6 py-2 rounded-md shadow hover:bg-green-700 transition">
         Enviar Anúncio
       </button>
     </div>

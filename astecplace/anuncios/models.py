@@ -5,8 +5,6 @@ from categorias.models import Categoria
 from django.shortcuts import render, get_object_or_404
 
 
-
-
 class Anuncios(models.Model):
     CATEGORIA_CHOICES = [
         ('imovel', 'Imóvel Rural'),

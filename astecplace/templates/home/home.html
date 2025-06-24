@@ -6,7 +6,7 @@
 {% block content %}
 
   {% if resultados %}
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-8 xl:px-16 2xl:px-24">
       {% for anuncio in resultados %}
         <div class="bg-white p-4 rounded shadow">
           <h2 class="text-lg font-semibold">{{ anuncio.titulo }}</h2>
@@ -18,27 +18,31 @@
   {% endif %}
 
   {% if request.resolver_match.url_name == 'home' %}
-    <aside class="hidden lg:block fixed top-20 left-4 w-56 xl:w-64 2xl:w-72 z-50">
-      <div class="bg-white rounded-2xl shadow-lg border-l-4 border-green-600 p-3">
-        <h3 class="text-lg font-bold text-green-800 mb-3 flex items-center gap-2">
-          <span class="w-2 h-5 bg-gradient-to-b from-green-400 to-green-700 rounded-full"></span>
-          Notícias
-        </h3>
-        <div class="space-y-3 max-h-[70vh] overflow-y-auto pr-1 custom-scrollbar">
-          {% for noticia in noticias %}
-            <article class="bg-green-50 rounded-lg border border-green-200 p-2 shadow hover:shadow-md transition-all duration-200 flex flex-col">
-              {% if noticia.imagem %}
-                <img src="{{ noticia.imagem.url }}" alt="{{ noticia.titulo }}" class="w-full rounded mb-2">
-              {% endif %}
-              <h4 class="text-xs font-bold text-green-900 mb-1 truncate">{{ noticia.titulo }}</h4>
-              <p class="text-[11px] text-gray-700 leading-snug mb-1 line-clamp-2">{{ noticia.conteudo|truncatechars:60 }}</p>
-              <span class="text-[10px] text-green-700 font-semibold">Leia mais</span>
-            </article>
-          {% endfor %}
-        </div>
-      </div>
-    </aside>
-    <div class="lg:ml-60 xl:ml-72 2xl:ml-80">
+    <!-- Bloco lateral de notícias -->
+    <aside class="hidden lg:block fixed top-20 left-4 w-200 xl:w-100 2xl:w-[400px] z-50">
+  <div class="bg-white rounded-2xl shadow-lg border-l-4 border-green-600 p-4">
+    <h3 class="text-xl font-bold text-green-800 mb-4 flex items-center gap-2">
+      <span class="w-2 h-6 bg-gradient-to-b from-green-400 to-green-700 rounded-full"></span>
+      Notícias
+    </h3>
+    <div class="space-y-6 max-h-[80vh] overflow-y-auto pr-2 custom-scrollbar">
+      {% for noticia in noticias %}
+        <article class="bg-green-50 rounded-lg border border-green-300 p-3 shadow hover:shadow-md transition-all duration-200">
+          {% if noticia.imagem %}
+            <img src="{{ noticia.imagem.url }}" alt="{{ noticia.titulo }}" class="w-full h-auto rounded mb-3 object-cover">
+          {% endif %}
+          <h4 class="text-sm font-bold text-green-900 mb-1">{{ noticia.titulo }}</h4>
+          <p class="text-[13px] text-gray-800 mb-2">{{ noticia.conteudo|truncatechars:100 }}</p>
+          <span class="text-xs text-green-700 font-semibold underline">Leia mais</span>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</aside>
+
+
+    <!-- Conteúdo principal com espaçamento à direita do menu fixo -->
+    <div class="w-full md:w-5/4">
   {% endif %}
 
     <!-- Seção institucional -->
@@ -59,7 +63,7 @@
 
     <!-- Seção de categorias -->
     {% if request.resolver_match.url_name == 'home' %}
-      <h2 class="text-2xl font-bold text-center mb-6"></h2>
+      <h2 class="text-2xl font-bold text-center mb-6">Categorias</h2>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
         {% for categoria in categorias %}
           <a href="{% url 'anuncios_por_categorias' categoria.id %}" class="bg-gray-200 rounded-xl shadow p-4 flex flex-col items-center hover:shadow-lg transition">
@@ -82,7 +86,6 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {% for anuncio in anuncios %}
           <div class="bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col">
-
             {% if anuncio.imagens.all|length %}
               <div class="swiper mySwiper-{{ forloop.counter }} w-full h-64 mb-4 rounded-lg overflow-hidden">
                 <div class="swiper-wrapper">
@@ -124,57 +127,47 @@
       <p class="text-center text-gray-600">Nenhum anúncio encontrado.</p>
     {% endif %}
 
-    <!-- MODAL DO FORMULÁRIO -->
+    <!-- Modal com formulário -->
     <div id="formModal" class="fixed inset-0 z-50 bg-black bg-opacity-50 hidden flex items-center justify-center">
       <div class="bg-white w-full max-w-md rounded shadow p-6 relative">
         <button onclick="fecharFormulario()" class="absolute top-2 right-3 text-gray-600 text-xl">&times;</button>
         <h3 class="text-xl font-bold mb-4">Fale com a Astecplace</h3>
-
-    <form method="POST" action="{% url 'enviar_lead_bitrix' %}" class="space-y-4">
-      {% csrf_token %}
-      <input type="hidden" id="tituloInput" name="titulo">
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Nome</label>
-        <input type="text" name="nome" required class="w-full border border-gray-300 rounded px-3 py-2">
+        <form method="POST" action="{% url 'enviar_lead_bitrix' %}" class="space-y-4">
+          {% csrf_token %}
+          <input type="hidden" id="tituloInput" name="titulo">
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Nome</label>
+            <input type="text" name="nome" required class="w-full border border-gray-300 rounded px-3 py-2">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">E-mail</label>
+            <input type="email" name="email" required class="w-full border border-gray-300 rounded px-3 py-2">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Telefone</label>
+            <input type="text" name="telefone" required class="w-full border border-gray-300 rounded px-3 py-2">
+          </div>
+          <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-full">Enviar para Astecplace</button>
+        </form>
       </div>
-      <div>
-        <label class="block text-sm font-medium text-gray-700">E-mail</label>
-        <input type="email" name="email" required class="w-full border border-gray-300 rounded px-3 py-2">
-      </div>
-      <div>
-        <div>
-       <label class="block text-sm font-medium text-gray-700">Telefone</label>
-       <input type="text" name="telefone" required class="w-full border border-gray-300 rounded px-3 py-2">
-</div>
+    </div>
 
-<button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-full">
-  Enviar para Astecplace
-</button>
-
-</form>
-</div>
-</div>
-
-{% endfor %}
-
-    {% endfor %}
-  </div>
-{% else %}
-  <p class="text-center text-gray-600">Nenhum anúncio encontrado.</p>
-{% endif %}
+  {% if request.resolver_match.url_name == 'home' %}
+    </div> <!-- Fecha o bloco da margem lateral -->
+  {% endif %}
 
 {% endblock %}
 
 {% block extra_scripts %}
   <script>
-  function abrirFormulario(titulo) {
-    document.getElementById('tituloInput').value = titulo;
-    document.getElementById('formModal').classList.remove('hidden');
-  }
+    function abrirFormulario(titulo) {
+      document.getElementById('tituloInput').value = titulo;
+      document.getElementById('formModal').classList.remove('hidden');
+    }
 
-  function fecharFormulario() {
-    document.getElementById('formModal').classList.add('hidden');
-  }
+    function fecharFormulario() {
+      document.getElementById('formModal').classList.add('hidden');
+    }
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -198,3 +191,4 @@
     });
   </script>
 {% endblock %}
+

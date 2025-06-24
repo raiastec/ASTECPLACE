@@ -15,50 +15,42 @@
 
 
 <header class="bg-gradient-to-r from-lime-600 to-green-600 text-white shadow-md fixed top-0 left-0 w-full z-50">
-  <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between py-3 gap-3">
-    <!-- Logo -->
-    <a href="/" class="text-2xl font-extrabold tracking-tight text-white flex-1 text-center md:text-left">
-      Astecplace
-    </a>
-    <!-- Navegação centralizada + ícone de busca -->
-    <nav class="flex gap-2 md:gap-4 items-center text-sm font-medium flex-1 justify-center">
+  <div class="max-w-7xl mx-auto px-4 flex items-center justify-between py-3">
+
+    <!-- ESQUERDA: Logo + Redes Sociais -->
+    <div class="flex items-center gap-4">
+      <a href="/" class="text-2xl font-extrabold tracking-tight text-white">
+        Astecplace
+      </a>
+      <div class="hidden md:flex items-center gap-3 ml-2">
+        <a href="https://wa.me/seunumerowhatsapp" target="_blank" title="WhatsApp">
+          <img src="{% static 'icons/whatsapp.svg' %}" alt="WhatsApp" class="w-5 h-5">
+        </a>
+        <a href="https://instagram.com/seuperfil" target="_blank" title="Instagram">
+          <img src="{% static 'icons/instagram.svg' %}" alt="Instagram" class="w-5 h-5">
+        </a>
+        <span class="text-sm font-light hidden lg:inline">Seg à Sex - 08h às 18h</span>
+      </div>
+    </div>
+
+    <!-- CENTRO: Navegação -->
+    <nav class="flex gap-2 md:gap-4 items-center text-sm font-medium">
       <a href="/" class="hover:underline hover:text-lime-200 transition">Início</a>
       <a href="{% url 'formulario_anunciar' %}" class="bg-white text-green-700 px-3 py-1 rounded-lg font-semibold shadow hover:bg-green-100 transition">Anunciar</a>
       <a href="#quem-somos" class="hover:underline hover:text-lime-200 transition">Quem somos</a>
-      <!-- Ícone de busca (mobile) -->
-      <button id="openSearchBtn" class="md:hidden p-2 rounded hover:bg-lime-700 transition ml-1" aria-label="Abrir busca">
-        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <circle cx="11" cy="11" r="8" />
-          <line x1="21" y1="21" x2="16.65" y2="16.65" />
-        </svg>
-      </button>
     </nav>
-    <!-- Campo de busca (desktop) -->
-    <form action="{% url 'busca_anuncios' %}" method="GET" class="hidden md:flex gap-2 w-full md:w-auto">
-      <input type="text" name="q" placeholder="Buscar anúncios..."
-        class="px-4 py-1 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-lime-400 text-gray-800 w-full md:w-56 transition">
-      <button type="submit" class="bg-lime-700 hover:bg-lime-800 text-white px-4 py-1 rounded-lg font-semibold transition">
+
+    <!-- DIREITA: Busca -->
+    <form method="get" action="{% url 'busca_anuncios' %}" class="hidden md:flex items-center gap-2">
+      <input type="text" name="q" placeholder="Buscar anúncios..." class="px-3 py-1 rounded-l-lg text-sm text-gray-800 focus:outline-none">
+      <button type="submit" class="bg-green-800 text-white px-3 py-1 rounded-r-lg hover:bg-green-700 text-sm">
         Buscar
       </button>
     </form>
-  </div>
-  <!-- Campo de busca mobile (overlay) -->
-  <div id="mobileSearch" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden items-start justify-center md:hidden">
-    <div class="bg-white rounded-lg shadow-lg mt-24 p-4 w-11/12 max-w-md flex flex-col">
-      <div class="flex justify-between items-center mb-2">
-        <span class="text-green-700 font-bold">Buscar anúncios</span>
-        <button id="closeSearchBtn" class="text-gray-500 hover:text-red-500 text-2xl leading-none">&times;</button>
-      </div>
-      <form action="{% url 'busca_anuncios' %}" method="GET" class="flex gap-2">
-        <input type="text" name="q" placeholder="Digite sua busca..." autofocus
-          class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-lime-400 text-gray-800 w-full transition">
-        <button type="submit" class="bg-lime-700 hover:bg-lime-800 text-white px-4 py-2 rounded-lg font-semibold transition">
-          Buscar
-        </button>
-      </form>
-    </div>
+
   </div>
 </header>
+
 <!-- Espaço para compensar o header fixo -->
 <div class="h-20"></div>
 

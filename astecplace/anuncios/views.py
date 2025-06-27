@@ -19,6 +19,11 @@ def home_view(request):
         'categorias': categorias,
         'noticias': noticias,
     })
+##metodo para listar os anúncios ativos
+def detalhe_produto(request, pk):
+    produto = get_object_or_404(Anuncios, pk=pk)
+    return render(request, 'anuncios/produto_detalhe.html', {'produto': produto})
+
 
 def formulario_anunciar(request):
     if request.method == 'POST':

@@ -62,19 +62,32 @@
     </section>
 
     <!-- Seção de categorias -->
-    {% if request.resolver_match.url_name == 'home' %}
-      <h2 class="text-2xl font-bold text-center mb-6">Categorias</h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
-        {% for categoria in categorias %}
-          <a href="{% url 'anuncios_por_categorias' categoria.id %}" class="bg-gray-200 rounded-xl shadow p-4 flex flex-col items-center hover:shadow-lg transition">
-            {% if categoria.icone %}
-              <img src="{{ categoria.icone.url }}" class="w-14 h-14 object-contain mb-2" alt="{{ categoria.nome }}">
-            {% endif %}
-            <p class="text-center text-sm font-semibold text-gray-700">{{ categoria.nome }}</p>
-          </a>
-        {% endfor %}
+{% if request.resolver_match.url_name == 'home' %}
+  <h2 class="text-2xl font-bold text-center mb-6"></h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-10">
+    {% for categoria in categorias %}
+      <a href="{% url 'anuncios_por_categorias' categoria.id %}" class="relative group rounded-xl overflow-hidden shadow-lg transform transition duration-300 hover:scale-100 h-56">
+
+        {% if categoria.icone %}
+          <img src="{{ categoria.icone.url }}" alt="{{ categoria.nome }}" class= "w-full h-full object-cover">
+        {% endif %}
+
+           <!-- Nome fixo da categoria -->
+      <div class="absolute bottom-0 left-0 w-full bg-green-200 bg-opacity-90 text-gray-800 text-center py-2 font-semibold z-10">
+        {{ categoria.nome }}
       </div>
-    {% endif %}
+
+        <!-- Informações sobre a categoria aparecem ao passar o mouse -->
+        <div class="absolute inset-0 bg-green-900 bg-opacity-90 text-white flex flex-col items-center justify-center text-center opacity-0 group-hover:opacity-100 transition duration-300 px-4">
+          <h3 class="text-xl font-bold mb-1">{{ categoria.nome }}</h3>
+          <p class="text-sm">{{ categoria.descricao|truncatechars:80 }}</p>
+        </div>
+
+      </a>
+    {% endfor %}
+  </div>
+{% endif %}
+
 
     <!-- Seção de anúncios -->
     <h1 class="text-3xl font-bold mb-6 text-center">Anúncios</h1>

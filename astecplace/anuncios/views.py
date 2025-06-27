@@ -58,6 +58,7 @@ def anuncios_por_categorias(request, categoria_id):
     categoria = get_object_or_404(Categoria, id=categoria_id)
     anuncios = Anuncios.objects.filter(categoria=categoria, ativo=True)
 
+
     return render(request, 'home/home.html', {
         'categoria': categoria,
         'anuncios': anuncios,

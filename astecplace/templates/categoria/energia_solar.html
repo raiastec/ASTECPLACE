@@ -1,0 +1,41 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Energia Solar - Astecplace{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="relative bg-cover bg-center h-[600px] flex items-center" style="background-image: url('{% static 'img/solar-bg.jpg' %}');">
+  <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+  <div class="relative z-10 max-w-6xl mx-auto px-6 text-white text-center md:text-left">
+    <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4">Serviço Solar<br><span class="text-green-400">Especializado desde 1998</span></h1>
+    <p class="text-lg max-w-2xl">Acreditamos em práticas de energia sustentável que ajudam a melhorar os serviços de instalação de painéis solares.</p>
+    <a href="#sobre" class="inline-block mt-6 bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded shadow">Descubra mais</a>
+  </div>
+</section>
+
+<!-- Sobre a Empresa -->
+<section id="sobre" class="py-16 bg-white">
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
+    <div class="grid grid-cols-2 gap-4">
+      <img src="{% static 'img/solar-img1.jpg' %}" class="rounded shadow" alt="Painéis solares">
+      <img src="{% static 'img/solar-img2.jpg' %}" class="rounded shadow" alt="Instalação solar">
+      <img src="{% static 'img/solar-img3.jpg' %}" class="rounded shadow col-span-2" alt="Energia limpa">
+    </div>
+    <div>
+      <span class="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full uppercase tracking-wide font-semibold">Sobre a Empresa</span>
+      <h2 class="text-3xl font-bold mt-4 mb-4">Acreditamos em práticas sustentáveis de energia</h2>
+      <p class="text-gray-700 leading-relaxed mb-4">
+        Estamos encontrando maneiras de levar energia a mais pessoas, todos os dias. Nosso objetivo é fornecer mais energia limpa e sustentável para todo o país.
+      </p>
+      <ul class="text-gray-700 text-sm space-y-2">
+        <li>✅ Custos de energia mais baixos</li>
+        <li>✅ Ecologicamente correto</li>
+        <li>✅ Aumento no valor da sua casa</li>
+        <li>✅ Independência energética</li>
+      </ul>
+      <a href="#contato" class="mt-6 inline-block bg-green-600 text-white px-5 py-2 rounded hover:bg-green-700 shadow">Entrar em contato</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

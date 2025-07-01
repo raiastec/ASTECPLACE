@@ -59,14 +59,26 @@ def busca_anuncios(request):
 
 
 
-def anuncios_por_categorias(request, categoria_id):
+# views.py
+from django.shortcuts import render, get_object_or_404
+from anuncios.models import Anuncios
+from categorias.models import Categoria
+
+def anuncios_por_categorias_nome(request, categoria_id):
     categoria = get_object_or_404(Categoria, id=categoria_id)
     anuncios = Anuncios.objects.filter(categoria=categoria, ativo=True)
 
+    templates_especiais = {
+        'Energia Solar': 'categoria/energia_solar.html',
+        'Veiculos': 'categorias/veiculos.html',
+        'Imobiliaria': 'categorias/imobiliaria.html',
+    }
 
-    return render(request, 'home/home.html', {
+    template = templates_especiais.get(categoria.nome, 'categorias/categoria_padrao.html')
+
+    return render(request, template, {
         'categoria': categoria,
-        'anuncios': anuncios,
+        'anuncios': anuncios
     })
 
 import requests

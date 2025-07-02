@@ -2,6 +2,12 @@
 <html lang="pt-br">
 {% load static %}
 
+<!-- Conteúdo principal -->
+   <main class="w-full max-w-7xl mx-auto px-4 pt-20">
+  {% block content %}
+  {% endblock %}
+</main>
+    
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <meta charset="UTF-8">
@@ -23,12 +29,12 @@
         Astecplace
       </a>
       <div class="hidden md:flex items-center gap-3 ml-2">
-        <a href="https://wa.me/seunumerowhatsapp" target="_blank" title="WhatsApp">
-          <img src="{% static 'icons/whatsapp.svg' %}" alt="WhatsApp" class="w-5 h-5">
+      <!---  <a href="https://wa.me/seunumerowhatsapp" target="_blank" title="WhatsApp">
+          <img src="{% static 'img/whatsapp.png' %}" alt="WhatsApp" class="w-5 h-5">
         </a>
         <a href="https://instagram.com/seuperfil" target="_blank" title="Instagram">
           <img src="{% static 'icons/instagram.svg' %}" alt="Instagram" class="w-5 h-5">
-        </a>
+        </a> -->
         <span class="text-sm font-light hidden lg:inline">Seg à Sex - 08h às 18h</span>
       </div>
     </div>
@@ -84,12 +90,7 @@
   });
 </script>
 
-    <!-- Conteúdo principal -->
-    <main class="max-w-6xl mx-auto px-4 py-8">
-        {% block content %}
-        <!-- Conteúdo da página -->
-        {% endblock %}
-    </main>
+    
 
     
 <!-- Seção destacada acima do rodapé -->
@@ -174,6 +175,22 @@
             });
           </script>
         {% endblock %}
+<script>
+  new Swiper('.parceiros-swiper', {
+    slidesPerView: 3,
+    spaceBetween: 30,
+    loop: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+      640: { slidesPerView: 3 },
+      768: { slidesPerView: 4 },
+      1024: { slidesPerView: 5 }
+    }
+  });
+</script>
 
 </body>
 </html>

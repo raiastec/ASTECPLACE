@@ -1,4 +1,5 @@
 {% extends "base/base.html" %}
+{% block full_width %}true{% endblock %}
 {% load static %}
 
 {% block title %}Energia Solar - Astecplace{% endblock %}
@@ -7,14 +8,16 @@
 <!-- Hero Section -->
 
  <!-- Cabeçalho fixo abaixo do topo -->
-<section class="relative left-0 w-full z-50 h-[300px] overflow-hidden z-0">
+<section class="w-full h-[400px] relative z-10">
   <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{% static 'img/solar-bg.jpg' %}');"></div>
-  <div class="relative z-10 flex flex-col items-center justify-center h-full text-white text-center bg-black bg-opacity-40">
+  <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+
+  <div class="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4">
     <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
       Serviço Solar<br>
-      <span class="text-green-200">Especializado desde 1998</span>
+      <span class="text-green-200">Especializado</span>
     </h1>
-    <p class="text-lg max-w-2xl px-4">Acreditamos em práticas de energia sustentável que ajudam a melhorar os serviços de instalação de painéis solares.</p>
+    <p class="text-lg max-w-2xl">Acreditamos em práticas de energia sustentável que ajudam a melhorar os serviços de instalação de painéis solares.</p>
     <a href="#sobre" class="mt-6 bg-green-600 hover:bg-green-700 px-6 py-2 rounded shadow">Descubra mais</a>
   </div>
 </section>
@@ -26,14 +29,14 @@
 
 <!-- Sobre a Empresa -->
 <section id="sobre" class="py-16 bg-white">
-  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
-    <div class="grid grid-cols-2 gap-4">
-      <img src="{% static 'img/solar-img1.jpg' %}" class="rounded shadow" alt="Painéis solares">
-      <img src="{% static 'img/solar-img2.jpg' %}" class="rounded shadow" alt="Instalação solar">
-      <img src="{% static 'img/solar-img3.jpg' %}" class="rounded shadow col-span-2" alt="Energia limpa">
-    </div>
+  <div class="max-w-8xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 gap-10 items-center">
+    
+    <!-- Imagem -->
+    <img src="{% static 'img/ecopower.jpg' %}" class="rounded shadow w-full h-auto" alt="Painéis solares">
+
+    <!-- Texto -->
     <div>
-      <span class="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full uppercase tracking-wide font-semibold">Sobre a Empresa</span>
+      <span class="bg-gray-200 text-green-700 text-xs px-3 py-1 rounded-full uppercase tracking-wide font-semibold">Sobre a Empresa</span>
       <h2 class="text-3xl font-bold mt-4 mb-4">Acreditamos em práticas sustentáveis de energia</h2>
       <p class="text-gray-700 leading-relaxed mb-4">
         Estamos encontrando maneiras de levar energia a mais pessoas, todos os dias. Nosso objetivo é fornecer mais energia limpa e sustentável para todo o país.
@@ -46,6 +49,158 @@
       </ul>
       <a href="#contato" class="mt-6 inline-block bg-green-600 text-white px-5 py-2 rounded hover:bg-green-700 shadow">Entrar em contato</a>
     </div>
+
   </div>
 </section>
+
+<section class="bg-gray-50 py-16">
+  <div class="max-w-6xl mx-auto px-4 text-center">
+    <span class="text-sm uppercase text-green-600 font-semibold block mb-2">Portfólio</span>
+    <h2 class="text-3xl font-bold text-gray-800 mb-4">Projetos</h2>
+    <p class="text-gray-600 mb-10 max-w-2xl mx-auto">
+      Somos capazes de concluir projetos de qualquer escala, da preferência do cliente. Nossos serviços incluem, entre outros, design, construção e instalação.
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <img src="{% static 'img/solar1.jpg' %}" alt="Projeto 1" class="w-full h-60 object-cover rounded shadow-md">
+      <img src="{% static 'img/solar2.jpg' %}" alt="Projeto 2" class="w-full h-60 object-cover rounded shadow-md">
+      <img src="{% static 'img/solar3.jpg' %}" alt="Projeto 3" class="w-full h-60 object-cover rounded shadow-md">
+      <img src="{% static 'img/solar4.jpg' %}" alt="Projeto 4" class="w-full h-60 object-cover rounded shadow-md">
+      <img src="{% static 'img/solar5.jpg' %}" alt="Projeto 5" class="w-full h-60 object-cover rounded shadow-md">
+      <img src="{% static 'img/solar6.jpg' %}" alt="Projeto 6" class="w-full h-60 object-cover rounded shadow-md">
+    </div>
+  </div>
+</section>
+
+<section id="calculadora" class="py-16 bg-gray-50">
+  <div class="max-w-3xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-4">Simule seu Sistema Solar</h2>
+    <p class="text-center text-gray-600 mb-8">Insira o valor da sua conta de luz e o valor da tarifa para gerar seu relatório.</p>
+
+    <div class="bg-white p-6 rounded shadow">
+      <form id="neoCalc" class="space-y-4">
+        <div>
+          <label class="block font-medium text-gray-700 mb-1">Consumo médio (R$/mês):</label>
+          <input type="number" id="consumo" class="w-full border-gray-300 rounded p-2" placeholder="Ex: 300" required>
+        </div>
+        <div>
+          <label class="block font-medium text-gray-700 mb-1">Tarifa de energia (R$/kWh):</label>
+          <input type="number" step="0.01" id="tarifa" class="w-full border-gray-300 rounded p-2" placeholder="Ex: 0.80" required>
+        </div>
+        <button type="submit" class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700">Gerar Simulação</button>
+      </form>
+
+      <div id="resultado" class="mt-6 space-y-4 hidden">
+        <h3 class="text-xl font-semibold text-gray-800">Resultado da Simulação</h3>
+        <ul class="text-gray-700 space-y-2">
+          <li><strong>Potência do sistema:</strong> <span id="potencia"></span> kWp</li>
+          <li><strong>Quantidade de módulos:</strong> <span id="modulos"></span></li>
+          <li><strong>Investimento estimado:</strong> R$ <span id="investimento"></span></li>
+          <li><strong>Economia mensal:</strong> R$ <span id="economiaMensal"></span></li>
+          <li><strong>Economia acumulada (30 anos):</strong> R$ <span id="economiaTotal"></span></li>
+          <li><strong>Redução de CO₂:</strong> <span id="co2"></span> kg</li>
+          <li><strong>Árvores equivalentes plantadas:</strong> <span id="arvores"></span></li>
+        </ul>
+        <canvas id="graficoEconomia" class="w-full h-64"></canvas>
+        <button id="btnOrcamento" class="mt-4 w-full bg-gray-800 text-white py-2 rounded hover:bg-gray-900">Solicitar Orçamento</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.getElementById("neoCalc").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const consumo = parseFloat(document.getElementById("consumo").value);
+  const tarifa = parseFloat(document.getElementById("tarifa").value);
+
+  const irradiacao = 5;
+  const eficiencia = 0.8;
+  const dias = 30;
+  const potencia = consumo / (irradiacao * dias * eficiencia);
+
+  const modulos = Math.ceil(potencia * 1000 / 340);
+  const invest = (potencia * 7000).toFixed(2);
+  const economiaMensal = (consumo * tarifa * 0.8).toFixed(2);
+  const economiaTotal = (economiaMensal * 12 * 30).toFixed(2);
+  const co2 = (consumo * 12 * 30 * 0.1).toFixed(2); // 0.1 kg CO2 por kWh
+  const arvores = Math.round(co2 / 140);
+
+  document.getElementById("potencia").innerText = potencia.toFixed(2);
+  document.getElementById("modulos").innerText = modulos;
+  document.getElementById("investimento").innerText = invest;
+  document.getElementById("economiaMensal").innerText = economiaMensal;
+  document.getElementById("economiaTotal").innerText = economiaTotal;
+  document.getElementById("co2").innerText = co2;
+  document.getElementById("arvores").innerText = arvores;
+  document.getElementById("resultado").classList.remove("hidden");
+
+  new Chart(document.getElementById("graficoEconomia"), {
+    type: 'bar',
+    data: {
+      labels: ["Ano 1", "Ano 10", "Ano 20", "Ano 30"],
+      datasets: [{
+        label: "Economia acumulada (R$)",
+        backgroundColor: "#16a34a",
+        data: [
+          economiaMensal * 12,
+          economiaMensal * 12 * 10,
+          economiaMensal * 12 * 20,
+          economiaMensal * 12 * 30
+        ]
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        title: { display: true, text: 'Projeção de Economia' }
+      }
+    }
+  });
+});
+</script>
+
+<section class="bg-white py-16">
+  <div class="max-w-6xl mx-auto px-4 text-center">
+    <h2 class="text-2xl md:text-3xl font-bold mb-8"> Adquira sua energia solar atraves dos principais bancos </h2>
+    <div class="border-t-4 border-gray-700 w-16 mx-auto mb-10"></div>
+
+    <!-- Swiper Container -->
+    <div class="relative">
+      <div class="swiper parceiros-swiper">
+        <div class="swiper-wrapper items-center">
+          <!-- Logos -->
+          <div class="swiper-slide flex justify-center">
+            <img src="{% static 'img/parceiros/caixa.png' %}" alt="Caixa" class="h-16 object-contain">
+          </div>
+          <div class="swiper-slide flex justify-center">
+            <img src="{% static 'img/parceiros/cresol.jpg' %}" alt="Cresol" class="h-25 object-contain">
+          </div>
+          <div class="swiper-slide flex justify-center">
+            <img src="{% static 'img/parceiros/sicoob.png' %}" alt="Sicoob" class="h-20 object-contain">
+          </div>
+          <div class="swiper-slide flex justify-center">
+            <img src="{% static 'img/parceiros/bancobrasil.png' %}" alt="bancobrasil" class="h-25 object-contain">
+          </div>
+          <div class="swiper-slide flex justify-center">
+            <img src="{% static 'img/parceiros/bancoamazonia.png' %}" alt="bancoamazonia" class="h-25 object-contain">
+          </div>
+          <div class="swiper-slide flex justify-center">
+            <img src="{% static 'img/parceiros/credisis.png' %}" alt="credisis" class="h-20 object-contain">
+          </div>
+          <!-- Adicione mais logos aqui -->
+        </div>
+      </div>
+
+      <!-- Botões -->
+      <div class="swiper-button-next text-gray-700"></div>
+      <div class="swiper-button-prev text-gray-700"></div>
+    </div>
+  </div>
+</section>
+
+
 {% endblock %}
+

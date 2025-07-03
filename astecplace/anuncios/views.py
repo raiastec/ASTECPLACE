@@ -74,7 +74,7 @@ def anuncios_por_categorias_nome(request, categoria_id):
         
     }
 
-    template = templates_especiais.get(categoria.nome, 'categoria/pagina_categorias.html')
+    template = templates_especiais.get(categoria.nome, 'categoria/pagina_categorias')
 
     return render(request, template, {
         'categoria': categoria,

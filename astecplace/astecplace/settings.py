@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-0yxt-tz)4zz@+(bf6&_g^5ljs$@a!(v5t5gxkb0fv)rpftph*!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["astecplace-production.up.railway.app"]
+
+CSRF_TRUSTED_ORIGINS = ['https://astecplace-production.up.railway.app']
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

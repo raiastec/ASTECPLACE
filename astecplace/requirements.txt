@@ -5,4 +5,4 @@ whitenoise
 pillow
 requests
 django-environ
-decouple==0.0.7
+python-decouple==3.8

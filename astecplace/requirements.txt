@@ -6,3 +6,4 @@ pillow
 requests
 django-environ
 python-decouple==3.8
+django-cloudinary-storage

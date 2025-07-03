@@ -1,1 +1,1 @@
-echo web: gunicorn astecplace.wsgi >
+web: gunicorn astecplace.wsgi:application --bind 0.0.0.0:$PORT

@@ -1,1 +1,1 @@
-echo web: gunicorn astecplace.wsgi > Procfile
+echo web: gunicorn astecplace.wsgi >

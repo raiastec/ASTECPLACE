@@ -70,11 +70,11 @@ def anuncios_por_categorias_nome(request, categoria_id):
 
     templates_especiais = {
         'Energia Solar': 'categoria/energia_solar.html',
-        'Veiculos': 'categorias/veiculos.html',
-        'Imobiliaria': 'categorias/imobiliaria.html',
+        'Veiculos': 'categorias/astec_assessoria.html',
+        
     }
 
-    template = templates_especiais.get(categoria.nome, 'categorias/categoria_padrao.html')
+    template = templates_especiais.get(categoria.nome, 'categoria/pagina_categoria.html')
 
     return render(request, template, {
         'categoria': categoria,

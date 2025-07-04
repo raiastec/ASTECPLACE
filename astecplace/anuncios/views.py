@@ -70,7 +70,7 @@ def anuncios_por_categorias_nome(request, categoria_id):
 
     templates_especiais = {
         'Energia Solar': 'categoria/energia_solar.html',
-        'Astec Assessoria': 'categorias/astec_assessoria.html',
+        
         
     }
 
